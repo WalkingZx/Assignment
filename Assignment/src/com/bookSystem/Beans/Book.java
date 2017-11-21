@@ -28,15 +28,16 @@ public class Book implements Serializable
      * Create a constructor of Books class  
      * @param id 
      */
-    public Book(String title,String author,int year,String publisher,int availableCopies,String pubDate, int id)
+    public Book(String title,String author,int year,String publisher,int availableCopies,String pubDate)
     {
-       this.id = id ; 
        this.title = title ; 
        this.author = author ; 
        this.year = year ; 
        this.publisher = publisher; 
        this.avalCopies = availableCopies ; 
        this.pubDate = pubDate ; 
+       Random rand = new Random();
+       this.id = rand.nextInt() ;
     }
     
     /**

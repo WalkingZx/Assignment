@@ -12,7 +12,11 @@ public class BookList implements Serializable
      /**
     * @ store a collection of book objects 
     */
-   private static ArrayList<Book> bookList = new ArrayList<Book>();
+   private static final long serialVersionUID = 200000L;
+   private ArrayList<Book> bookList = new ArrayList<Book>();
+   
+   public BookList()
+   {}
    
    public BookList(ArrayList<Book> bookList){
 	   this.bookList = bookList;
@@ -60,6 +64,14 @@ public class BookList implements Serializable
    public int numOfBooks()
    {
 	   return bookList.size();
+   }
+   
+   public String toString(){
+	   String output = "";
+	   for(Book b : bookList){
+		   output += b.getId() + '\n' + b.getTitle() + '\n';
+	   }
+	   return output;
    }
    
 }

@@ -61,9 +61,9 @@ public class connection {
             ObjectInputStream objIn=new ObjectInputStream(in);
             temp=(UserList) objIn.readObject();
             objIn.close();
-            System.out.println("read object success!");
+            System.out.println("read user success!");
         } catch (IOException e) {
-            System.out.println("read object failed");
+            System.out.println("read user failed");
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -73,16 +73,20 @@ public class connection {
 	
 	public static BookList readBooksFromFile(){
 		BookList temp=null;
-        File file =new File(BOOK_FILE_NAME);
+        File file;
+		file = judeFileExists(new File(BOOK_FILE_NAME));
+		if(file.length() == 0){
+			return temp;
+		}
         FileInputStream in;
         try {
             in = new FileInputStream(file);
             ObjectInputStream objIn=new ObjectInputStream(in);
             temp=(BookList) objIn.readObject();
             objIn.close();
-            System.out.println("read object success!");
+            System.out.println("read book success!");
         } catch (IOException e) {
-            System.out.println("read object failed");
+            System.out.println("read book failed");
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

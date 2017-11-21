@@ -64,6 +64,10 @@ public class UserList implements Serializable
 	   return uDetail;
    }
    
+   public ArrayList<User> getAllUsers(){
+	   return this.userList;
+   }
+   
    public String toString(){
 	   String output = "";
 	   for(User u : userList){
