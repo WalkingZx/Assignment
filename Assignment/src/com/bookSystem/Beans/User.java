@@ -169,5 +169,9 @@ public class User implements Serializable
     {
         this.dateOfBirth = dateOfBirth ; 
     }
+    
+    public String toString(){
+    	return this.firstname + " " + this.surname;
+    }
     }
 

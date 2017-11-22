@@ -10,7 +10,7 @@ import javax.swing.*;
 import com.bookSystem.Beans.*;
 import com.bookSystem.Tools.connection;
 
-public class AddUser extends JFrame{
+public class changeUserInfo extends JFrame{
 	JPanel pan[] = new JPanel[9];
 	JLabel label_username = new JLabel("Username"); JTextField text_username = new JTextField();
 	JLabel label_firstname = new JLabel("firstname"); JTextField text_firstname = new JTextField();
@@ -24,8 +24,8 @@ public class AddUser extends JFrame{
 	JButton submit = new JButton("Submit");
 	JButton Reset = new JButton("Reset");
 	
-	AddUser(){
-		this.setTitle("Add one user information");
+	changeUserInfo(final User u){
+		this.setTitle("Change one user information");
 		this.setSize(500, 800);
 		this.setLayout(new GridLayout(9, 1));
 		Container con = this.getContentPane();
@@ -75,14 +75,14 @@ public class AddUser extends JFrame{
 				   String email = "";
 				   String dateOfBirth = "";
 				   
-				   username = text_username.getText();
-				   firstname = text_firstname.getText();
-				   surname = text_surname.getText();
-				   houseNumber = text_houseNumber.getText();
-				   streetName = text_streetName.getText();
-				   postcode = text_postcode.getText();
-				   email = text_email.getText();
-				   dateOfBirth = text_dateOfBirth.getText();
+				   username = u.getUsername();
+				   firstname = u.getFirstname();
+				   surname = u.getSurname();
+				   houseNumber = u.getHouseNumber();
+				   streetName = u.getStreetName();
+				   postcode = u.getPostcode();
+				   email = u.getEmail();
+				   dateOfBirth = u.getDateOfBirth();
 				   
 				   User u = new User(username, firstname, surname, houseNumber, streetName, postcode, email, dateOfBirth);
 				   UserList ulist = null;
@@ -96,15 +96,9 @@ public class AddUser extends JFrame{
 					   ulist.addUser(u);
 					   connection.writeUsersToFile(ulist);
 				   }else{
-					   System.out.println("Error in adding User");
+					   System.out.println("Error in changing User");
 				   }					   
 			}
 		});
-	}
-	
-	public static void main(String[] args){
-//		new AddUser();
-////		UserList ulist = connection.readUsersFromFile();
-////		System.out.println(ulist.toString() + "zx");
 	}
 }
