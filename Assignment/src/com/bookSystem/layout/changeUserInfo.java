@@ -11,6 +11,10 @@ import com.bookSystem.Beans.*;
 import com.bookSystem.Tools.connection;
 
 public class changeUserInfo extends JFrame{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	JPanel pan[] = new JPanel[9];
 	JLabel label_username = new JLabel("Username"); JTextField text_username = new JTextField();
 	JLabel label_firstname = new JLabel("firstname"); JTextField text_firstname = new JTextField();
@@ -25,6 +29,9 @@ public class changeUserInfo extends JFrame{
 	JButton Reset = new JButton("Reset");
 	
 	changeUserInfo(final User u){
+		text_username.setText(u.getUsername());
+		
+		System.out.println(u);
 		this.setTitle("Change one user information");
 		this.setSize(500, 800);
 		this.setLayout(new GridLayout(9, 1));
