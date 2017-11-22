@@ -86,7 +86,9 @@ public class AddBook extends JFrame{
 				   connection.writeBooksToFile(blist);
 			   }else{
 				   System.out.println("Error in adding Book");
-			   }		   
+			   }
+			   
+			   dispose();
 			}
 		});
 		
@@ -94,8 +96,8 @@ public class AddBook extends JFrame{
 	}
 	
 	public static void main(String[] args){
-//		new AddBook();
-		BookList blist = connection.readBooksFromFile();
-		System.out.println(blist.toString());
+		new AddBook();
+//		BookList blist = connection.readBooksFromFile();
+//		System.out.println(blist.toString());
 	}
 }

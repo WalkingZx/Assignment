@@ -38,9 +38,8 @@ public class changeUserInfo extends JFrame{
 		text_email.setText(u.getEmail());
 		text_dateOfBirth.setText(u.getDateOfBirth());
 		
-		System.out.println(u);
 		this.setTitle("Change one user information");
-		this.setSize(500, 800);
+		this.setSize(500, 700);
 		this.setLayout(new GridLayout(9, 1));
 		Container con = this.getContentPane();
 		for(int i = 0; i < 9; i++){
@@ -89,14 +88,14 @@ public class changeUserInfo extends JFrame{
 				   String email = "";
 				   String dateOfBirth = "";
 				   
-				   username = u.getUsername();
-				   firstname = u.getFirstname();
-				   surname = u.getSurname();
-				   houseNumber = u.getHouseNumber();
-				   streetName = u.getStreetName();
-				   postcode = u.getPostcode();
-				   email = u.getEmail();
-				   dateOfBirth = u.getDateOfBirth();
+				   username = text_username.getText();
+				   firstname = text_firstname.getText();
+				   surname = text_surname.getText();
+				   houseNumber = text_houseNumber.getText();
+				   streetName = text_streetName.getText();
+				   postcode = text_postcode.getText();
+				   email = text_email.getText();
+				   dateOfBirth = text_dateOfBirth.getText();
 				   
 				   User u = new User(username, firstname, surname, houseNumber, streetName, postcode, email, dateOfBirth);
 				   UserList ulist = null;
@@ -111,7 +110,10 @@ public class changeUserInfo extends JFrame{
 					   connection.writeUsersToFile(ulist);
 				   }else{
 					   System.out.println("Error in changing User");
-				   }					   
+				   }
+				   
+				   dispose();
+				   new UsersInformation();
 			}
 		});
 	}

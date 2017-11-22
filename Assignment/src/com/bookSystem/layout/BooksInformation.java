@@ -10,21 +10,23 @@ import java.util.Vector;
 import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
 
+import com.bookSystem.Beans.Book;
+import com.bookSystem.Beans.BookList;
 import com.bookSystem.Beans.User;
 import com.bookSystem.Beans.UserList;
 import com.bookSystem.Tools.connection;
 
-public class UsersInformation extends JFrame {
+public class BooksInformation extends JFrame {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 2L;
+	private static final long serialVersionUID = 3L;
 	JList<String> list = new JList<String>();
 //	JLabel label = new JLabel("List of users");
 	JPanel pan[] = new JPanel[1];
 	
-	UsersInformation(){
-		this.setTitle("List all users information");
+	BooksInformation(){
+		this.setTitle("List all books information");
 		this.setSize(300, 600);
 		this.setLayout(new GridLayout(1, 1));
 		Container con = this.getContentPane();
@@ -34,22 +36,22 @@ public class UsersInformation extends JFrame {
 			con.add(pan[i]);
 		}
 		
-		UserList ulist = connection.readUsersFromFile();
+		BookList blist = connection.readBooksFromFile();
 //		ArrayList<String> s = new ArrayList<String>();
 		Vector<String> s = new Vector<String>();
-		if(ulist != null){
+		if(blist != null){
 			int count = 0;
-			for(User u : ulist.getAllUsers()){
+			for(Book u : blist.getAllBooks()){
 				count++;
-				s.add(count + ". " + u.getUsername() + " " + u.getFirstname() + " " + u.getSurname());
+				s.add(count + ". " + u.getId() + " " + u.getTitle() + " " + u.getAuthor());
 			}		
 		}else{
-			s.add("No users!");
+			s.add("No books!");
 		}
 		list.setListData(s);
 		list.setVisibleRowCount(s.size());
 		list.setBorder(BorderFactory
-				.createTitledBorder("Double click to select one user to modify"));
+				.createTitledBorder("Double click to select one book to modify"));
 //		list.addListSelectionListener((ListSelectionListener) this);
 		pan[0].add(list);
 		list.setBounds(15, 15, 400, 700);
@@ -60,32 +62,30 @@ public class UsersInformation extends JFrame {
 					JList myList = (JList)e.getSource();
 					int index = myList.getSelectedIndex();
 					String fullname = (String) myList.getModel().getElementAt(index);
-					String username = getUsername(fullname);
-					UserList ulist = connection.readUsersFromFile();
-					User u = ulist.searchUserByUsername(username);
-					ArrayList<User> uarray = ulist.getAllUsers();
-					uarray.remove(u);
-					connection.writeUsersToFile(new UserList(uarray));
-					modifyUser(u);
+					String id = getIdOfBook(fullname);
+					BookList ulist = connection.readBooksFromFile();
+					ArrayList<Book> barray = ulist.getAllBooks();
+					Book u = null;
+					for(Book bb : barray){
+						if(id.equals(bb.getId() + "")){
+							u = bb;
+						}
+					}
+					barray.remove(u);
+					connection.writeBooksToFile(new BookList(barray));
+					modifyBook(u);
 					dispose();
-				}
+				} 
 			}
 
-			private void modifyUser(User u) {
-				new changeUserInfo(u);
+			private void modifyBook(Book u) {
+				new changeBookInfo(u);
 			}
 
-			private String getUsername(String fullname) {
+			private String getIdOfBook(String fullname) {
 				String[] s = fullname.split(" ");
 				return s[1];
 			}
-			
-			private String getFirstname(String fullname) {
-				String[] s = fullname.split(" ");
-				return s[2];
-			}		
-			
-			
 		});
 		
 		this.setVisible(true);
@@ -93,6 +93,6 @@ public class UsersInformation extends JFrame {
 	}
 	
 	public static void main(String[] args){
-		new UsersInformation();
+		new BooksInformation();
 	}
 }

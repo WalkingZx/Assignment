@@ -66,6 +66,10 @@ public class BookList implements Serializable
 	   return bookList.size();
    }
    
+   public ArrayList<Book> getAllBooks(){
+	   return this.bookList;
+   }
+   
    public String toString(){
 	   String output = "";
 	   for(Book b : bookList){
