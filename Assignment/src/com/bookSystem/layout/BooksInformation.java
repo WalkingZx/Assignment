@@ -39,7 +39,7 @@ public class BooksInformation extends JFrame {
 		BookList blist = connection.readBooksFromFile();
 //		ArrayList<String> s = new ArrayList<String>();
 		Vector<String> s = new Vector<String>();
-		if(blist != null){
+		if(blist != null && blist.numOfBooks() != 0){
 			int count = 0;
 			for(Book u : blist.getAllBooks()){
 				count++;
@@ -90,9 +90,5 @@ public class BooksInformation extends JFrame {
 		
 		this.setVisible(true);
 		
-	}
-	
-	public static void main(String[] args){
-		new BooksInformation();
 	}
 }

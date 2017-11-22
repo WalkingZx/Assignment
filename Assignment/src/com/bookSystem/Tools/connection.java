@@ -1,7 +1,9 @@
 package com.bookSystem.Tools;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -13,6 +15,7 @@ public class connection {
 	
 	private static String USER_FILE_NAME = "src/users";
 	private static String BOOK_FILE_NAME = "src/books";
+	private static String ADMIN_FILE_NAME = "src/admin";
 	
 	public static void writeUsersToFile(UserList ulist){
 		File file = null;
@@ -107,5 +110,21 @@ public class connection {
             }
         }
         return file;
+    }
+    
+    public static String getAdminInfo(){
+    	File file = new File(ADMIN_FILE_NAME);
+        StringBuilder result = new StringBuilder();
+        try{
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String s = null;
+            while((s = br.readLine())!=null){
+                result.append(System.lineSeparator()+s);
+            }
+            br.close();    
+        }catch(Exception e){
+            System.out.println("Error in reading ADMIN FILE");
+        }
+        return result.toString();
     }
 }

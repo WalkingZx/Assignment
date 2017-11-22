@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 import com.bookSystem.Beans.*;
+import com.bookSystem.Tools.InterfaceControl;
 import com.bookSystem.Tools.connection;
 
 public class changeBookInfo extends JFrame{
@@ -46,6 +47,7 @@ public class changeBookInfo extends JFrame{
 		}
 		
 		this.setVisible(true);
+		InterfaceControl.setLocationCentre(this);
 		
 		pan[0].add(label_id); label_id.setBounds(15, 15, 100, 20);
 		pan[0].add(text_id); text_id.setBounds(200, 15, 200, 20); text_id.setEnabled(false);
@@ -93,10 +95,12 @@ public class changeBookInfo extends JFrame{
 				   if(obj == null){
 					   blist = new BookList();
 					   blist.addBook(b);
+					   JOptionPane.showMessageDialog(null, "Change successfully!");
 					   connection.writeBooksToFile(blist);
 				   }else if(obj instanceof BookList){
 					   blist = (BookList) obj;
 					   blist.addBook(b);
+					   JOptionPane.showMessageDialog(null, "Change successfully!");
 					   connection.writeBooksToFile(blist);
 				   }else{
 					   System.out.println("Error in changing Book");

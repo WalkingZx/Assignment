@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 import com.bookSystem.Beans.*;
+import com.bookSystem.Tools.InterfaceControl;
 import com.bookSystem.Tools.connection;
 
 public class AddUser extends JFrame{
@@ -36,7 +37,8 @@ public class AddUser extends JFrame{
 		}
 		
 		this.setVisible(true);
-		
+		   InterfaceControl.setLocationCentre(this);
+		   
 		pan[0].add(label_username); label_username.setBounds(10, 15, 100, 20);
 		pan[0].add(text_username); text_username.setBounds(200, 15, 200, 20);
 
@@ -90,21 +92,18 @@ public class AddUser extends JFrame{
 				   if(obj == null){
 					   ulist = new UserList();
 					   ulist.addUser(u);
+					   JOptionPane.showMessageDialog(null, "Add successfully!");
 					   connection.writeUsersToFile(ulist);
 				   }else if(obj instanceof UserList){
 					   ulist = (UserList) obj;
 					   ulist.addUser(u);
+					   JOptionPane.showMessageDialog(null, "Add successfully!");
 					   connection.writeUsersToFile(ulist);
 				   }else{
 					   System.out.println("Error in adding User");
-				   }					   
+				   }				
+				   dispose();
 			}
 		});
 	}
-	
-//	public static void main(String[] args){
-//		new AddUser();
-////		UserList ulist = connection.readUsersFromFile();
-////		System.out.println(ulist.toString() + "zx");
-//	}
 }

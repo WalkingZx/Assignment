@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 import com.bookSystem.Beans.*;
+import com.bookSystem.Tools.InterfaceControl;
 import com.bookSystem.Tools.connection;
 
 public class AddBook extends JFrame{
@@ -24,7 +25,7 @@ public class AddBook extends JFrame{
 	
 	AddBook(){
 		this.setTitle("Add one book information");
-		this.setSize(500, 800);
+		this.setSize(450, 600);
 		this.setLayout(new GridLayout(8, 1));
 		Container con = this.getContentPane();
 		for(int i = 0; i < 7; i++){
@@ -34,7 +35,8 @@ public class AddBook extends JFrame{
 		}
 		
 		this.setVisible(true);
-
+	   InterfaceControl.setLocationCentre(this);
+	   
 		pan[0].add(label_title); label_title.setBounds(15, 15, 100, 20);
 		pan[0].add(text_title); text_title.setBounds(200, 15, 200, 20);
 		
@@ -79,10 +81,12 @@ public class AddBook extends JFrame{
 			   if(obj == null){
 				   blist = new BookList();
 				   blist.addBook(b);
+				   JOptionPane.showMessageDialog(null, "Add successfully!");
 				   connection.writeBooksToFile(blist);
 			   }else if(obj instanceof BookList){
 				   blist = (BookList) obj;
 				   blist.addBook(b);
+				   JOptionPane.showMessageDialog(null, "Add successfully!");
 				   connection.writeBooksToFile(blist);
 			   }else{
 				   System.out.println("Error in adding Book");
@@ -93,11 +97,5 @@ public class AddBook extends JFrame{
 		});
 		
 		
-	}
-	
-	public static void main(String[] args){
-		new AddBook();
-//		BookList blist = connection.readBooksFromFile();
-//		System.out.println(blist.toString());
 	}
 }

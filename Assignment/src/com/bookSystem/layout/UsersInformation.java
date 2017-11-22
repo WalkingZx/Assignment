@@ -37,7 +37,7 @@ public class UsersInformation extends JFrame {
 		UserList ulist = connection.readUsersFromFile();
 //		ArrayList<String> s = new ArrayList<String>();
 		Vector<String> s = new Vector<String>();
-		if(ulist != null){
+		if(ulist != null && ulist.numOfUsers() !=0){
 			int count = 0;
 			for(User u : ulist.getAllUsers()){
 				count++;
@@ -90,9 +90,5 @@ public class UsersInformation extends JFrame {
 		
 		this.setVisible(true);
 		
-	}
-	
-	public static void main(String[] args){
-		new UsersInformation();
 	}
 }

@@ -37,7 +37,7 @@ public class Book implements Serializable
        this.avalCopies = availableCopies ; 
        this.pubDate = pubDate ; 
        Random rand = new Random();
-       this.id = rand.nextInt() ;
+       this.id = rand.nextInt(1000000) ;
     }
     
     /**
