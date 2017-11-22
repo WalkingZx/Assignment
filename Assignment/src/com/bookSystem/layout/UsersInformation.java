@@ -62,6 +62,7 @@ public class UsersInformation extends JFrame {
 					String fullname = (String) myList.getModel().getElementAt(index);
 					String username = getUsername(fullname);
 					User u = ulist.searchUserByUsername(username);
+					ulist.getAllUsers().remove(u);
 					modifyUser(u);
 				}
 			}

@@ -30,6 +30,13 @@ public class changeUserInfo extends JFrame{
 	
 	changeUserInfo(final User u){
 		text_username.setText(u.getUsername());
+		text_firstname.setText(u.getFirstname());
+		text_surname.setText(u.getSurname());
+		text_houseNumber.setText(u.getHouseNumber());
+		text_streetName.setText(u.getStreetName());
+		text_postcode.setText(u.getPostcode());
+		text_email.setText(u.getEmail());
+		text_dateOfBirth.setText(u.getDateOfBirth());
 		
 		System.out.println(u);
 		this.setTitle("Change one user information");
