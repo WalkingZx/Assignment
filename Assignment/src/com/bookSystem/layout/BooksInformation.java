@@ -14,6 +14,7 @@ import com.bookSystem.Beans.Book;
 import com.bookSystem.Beans.BookList;
 import com.bookSystem.Beans.User;
 import com.bookSystem.Beans.UserList;
+import com.bookSystem.Tools.InterfaceControl;
 import com.bookSystem.Tools.connection;
 
 public class BooksInformation extends JFrame {
@@ -89,6 +90,6 @@ public class BooksInformation extends JFrame {
 		});
 		
 		this.setVisible(true);
-		
+		InterfaceControl.setLocationCentre(this);
 	}
 }

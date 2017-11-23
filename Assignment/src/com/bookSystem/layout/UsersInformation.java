@@ -12,6 +12,7 @@ import javax.swing.event.ListSelectionListener;
 
 import com.bookSystem.Beans.User;
 import com.bookSystem.Beans.UserList;
+import com.bookSystem.Tools.InterfaceControl;
 import com.bookSystem.Tools.connection;
 
 public class UsersInformation extends JFrame {
@@ -89,6 +90,6 @@ public class UsersInformation extends JFrame {
 		});
 		
 		this.setVisible(true);
-		
+		InterfaceControl.setLocationCentre(this);
 	}
 }
