@@ -11,6 +11,10 @@ import com.bookSystem.Beans.*;
 import com.bookSystem.Tools.InterfaceControl;
 import com.bookSystem.Tools.connection;
 
+/**
+ *  This is a interface for adding one new book into booklist
+ *
+ */
 public class AddBook extends JFrame{
 	JPanel pan[] = new JPanel[7];
 	JLabel label_title = new JLabel("title"); JTextField text_title = new JTextField();
@@ -23,7 +27,11 @@ public class AddBook extends JFrame{
 	JButton submit = new JButton("Submit");
 	JButton Reset = new JButton("Reset");
 	
-	AddBook(){
+	/**
+	 * constructor
+	 *
+	 */
+	public AddBook(){
 		this.setTitle("Add one book information");
 		this.setSize(450, 600);
 		this.setLayout(new GridLayout(8, 1));
@@ -56,46 +64,46 @@ public class AddBook extends JFrame{
 		pan[5].add(text_pubDate); text_pubDate.setBounds(200, 15, 200, 20);
 		
 		pan[6].add(submit); submit.setBounds(85, 15, 80, 50);
+		
 		submit.addActionListener(new ActionListener(){
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
 			    String title = "";
 			    String author = "";
 			    int year = 0;
 			    String publisher = "";
 			    int avalCopies = 0;
 			    String pubDate = "";
-				
-			    
-			    title = text_title.getText();
-			    author = text_author.getText();
-			    publisher = text_publisher.getText();
-			    pubDate = text_publisher.getText();
-			    if(!text_year.getText().isEmpty()) year = Integer.parseInt(text_year.getText());
-			    if(!text_avalCopies.getText().isEmpty())avalCopies = Integer.parseInt(text_avalCopies.getText());
-			    
-			    Book b = new Book(title, author, year, publisher, avalCopies, pubDate);
-			    BookList blist= null;
-			    Object obj = connection.readBooksFromFile();
-			   if(obj == null){
-				   blist = new BookList();
-				   blist.addBook(b);
-				   JOptionPane.showMessageDialog(null, "Add successfully!");
-				   connection.writeBooksToFile(blist);
-			   }else if(obj instanceof BookList){
-				   blist = (BookList) obj;
-				   blist.addBook(b);
-				   JOptionPane.showMessageDialog(null, "Add successfully!");
-				   connection.writeBooksToFile(blist);
-			   }else{
-				   System.out.println("Error in adding Book");
-			   }
-			   
+			    try {
+					title = text_title.getText();
+					author = text_author.getText();
+					publisher = text_publisher.getText();
+					pubDate = text_publisher.getText();
+					if(!text_year.getText().isEmpty()) year = Integer.parseInt(text_year.getText());
+					if(!text_avalCopies.getText().isEmpty())avalCopies = Integer.parseInt(text_avalCopies.getText());
+					
+					Book b = new Book(title, author, year, publisher, avalCopies, pubDate);
+					BookList blist= null;
+					Object obj = connection.readBooksFromFile();
+   if(obj == null){
+					   blist = new BookList();
+					   blist.addBook(b);
+					   JOptionPane.showMessageDialog(null, "Add successfully!");
+					   connection.writeBooksToFile(blist);
+   }else if(obj instanceof BookList){
+					   blist = (BookList) obj;
+					   blist.addBook(b);
+					   JOptionPane.showMessageDialog(null, "Add successfully!");
+					   connection.writeBooksToFile(blist);
+   }else{
+					   System.out.println("Error in adding Book");
+   }
+				} catch (NumberFormatException e) {
+					e.printStackTrace();
+				} catch (HeadlessException e) {
+					e.printStackTrace();
+				}		   
 			   dispose();
 			}
-		});
-		
-		
+		});	
 	}
 }

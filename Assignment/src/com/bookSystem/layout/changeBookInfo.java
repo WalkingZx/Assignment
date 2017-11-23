@@ -11,10 +11,10 @@ import com.bookSystem.Beans.*;
 import com.bookSystem.Tools.InterfaceControl;
 import com.bookSystem.Tools.connection;
 
+/**
+ * Change the detail of one book
+ */
 public class changeBookInfo extends JFrame{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 4L;
 	JPanel pan[] = new JPanel[8];
 	JLabel label_id = new JLabel("Id"); JTextField text_id = new JTextField();
@@ -72,9 +72,7 @@ public class changeBookInfo extends JFrame{
 		
 		pan[7].add(submit); submit.setBounds(85, 15, 80, 50);
 		submit.addActionListener(new ActionListener(){
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
 				    String title = "";
 				    String author = "";
 				    int year = 0;
@@ -82,29 +80,35 @@ public class changeBookInfo extends JFrame{
 				    int avalCopies = 0;
 				    String pubDate = "";
 				   
-				    title = text_title.getText();
-				    author = text_author.getText();
-				    publisher = text_publisher.getText();
-				    pubDate = text_publisher.getText();
-				    if(!text_year.getText().isEmpty()) year = Integer.parseInt(text_year.getText());
-				    if(!text_avalCopies.getText().isEmpty())avalCopies = Integer.parseInt(text_avalCopies.getText());
-				   
-				   Book b = new Book(title, author, year, publisher, avalCopies, pubDate);
-				   BookList blist = null;
-				   Object obj = connection.readBooksFromFile();
-				   if(obj == null){
-					   blist = new BookList();
-					   blist.addBook(b);
-					   JOptionPane.showMessageDialog(null, "Change successfully!");
-					   connection.writeBooksToFile(blist);
-				   }else if(obj instanceof BookList){
-					   blist = (BookList) obj;
-					   blist.addBook(b);
-					   JOptionPane.showMessageDialog(null, "Change successfully!");
-					   connection.writeBooksToFile(blist);
-				   }else{
-					   System.out.println("Error in changing Book");
-				   }
+				    try {
+						title = text_title.getText();
+						author = text_author.getText();
+						publisher = text_publisher.getText();
+						pubDate = text_publisher.getText();
+						if(!text_year.getText().isEmpty()) year = Integer.parseInt(text_year.getText());
+						if(!text_avalCopies.getText().isEmpty())avalCopies = Integer.parseInt(text_avalCopies.getText());
+   
+   Book b = new Book(title, author, year, publisher, avalCopies, pubDate);
+   BookList blist = null;
+   Object obj = connection.readBooksFromFile();
+   if(obj == null){
+						   blist = new BookList();
+						   blist.addBook(b);
+						   JOptionPane.showMessageDialog(null, "Change successfully!");
+						   connection.writeBooksToFile(blist);
+   }else if(obj instanceof BookList){
+						   blist = (BookList) obj;
+						   blist.addBook(b);
+						   JOptionPane.showMessageDialog(null, "Change successfully!");
+						   connection.writeBooksToFile(blist);
+   }else{
+						   System.out.println("Error in changing Book");
+   }
+					} catch (NumberFormatException e) {
+						e.printStackTrace();
+					} catch (HeadlessException e) {
+						e.printStackTrace();
+					}
 				   
 				   dispose();
 				   new BooksInformation();

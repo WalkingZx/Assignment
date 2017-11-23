@@ -10,11 +10,11 @@ import javax.swing.*;
 import com.bookSystem.Beans.*;
 import com.bookSystem.Tools.InterfaceControl;
 import com.bookSystem.Tools.connection;
-
+/**
+ * Change the detail of a user
+ */
 public class changeUserInfo extends JFrame{
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	JPanel pan[] = new JPanel[9];
 	JLabel label_username = new JLabel("Username"); JTextField text_username = new JTextField();
@@ -90,31 +90,35 @@ public class changeUserInfo extends JFrame{
 				   String email = "";
 				   String dateOfBirth = "";
 				   
-				   username = text_username.getText();
-				   firstname = text_firstname.getText();
-				   surname = text_surname.getText();
-				   houseNumber = text_houseNumber.getText();
-				   streetName = text_streetName.getText();
-				   postcode = text_postcode.getText();
-				   email = text_email.getText();
-				   dateOfBirth = text_dateOfBirth.getText();
-				   
-				   User u = new User(username, firstname, surname, houseNumber, streetName, postcode, email, dateOfBirth);
-				   UserList ulist = null;
-				   Object obj = connection.readUsersFromFile();
-				   if(obj == null){
-					   ulist = new UserList();
-					   ulist.addUser(u);
-					   JOptionPane.showMessageDialog(null, "Change successfully!");
-					   connection.writeUsersToFile(ulist);
-				   }else if(obj instanceof UserList){
-					   ulist = (UserList) obj;
-					   ulist.addUser(u);
-					   JOptionPane.showMessageDialog(null, "Change successfully!");
-					   connection.writeUsersToFile(ulist);
-				   }else{
-					   System.out.println("Error in changing User");
-				   }
+				   try {
+					username = text_username.getText();
+					   firstname = text_firstname.getText();
+					   surname = text_surname.getText();
+					   houseNumber = text_houseNumber.getText();
+					   streetName = text_streetName.getText();
+					   postcode = text_postcode.getText();
+					   email = text_email.getText();
+					   dateOfBirth = text_dateOfBirth.getText();
+					   
+					   User u = new User(username, firstname, surname, houseNumber, streetName, postcode, email, dateOfBirth);
+					   UserList ulist = null;
+					   Object obj = connection.readUsersFromFile();
+					   if(obj == null){
+						   ulist = new UserList();
+						   ulist.addUser(u);
+						   JOptionPane.showMessageDialog(null, "Change successfully!");
+						   connection.writeUsersToFile(ulist);
+					   }else if(obj instanceof UserList){
+						   ulist = (UserList) obj;
+						   ulist.addUser(u);
+						   JOptionPane.showMessageDialog(null, "Change successfully!");
+						   connection.writeUsersToFile(ulist);
+					   }else{
+						   System.out.println("Error in changing User");
+					   }
+				} catch (HeadlessException e) {
+					e.printStackTrace();
+				}
 				   
 				   dispose();
 				   new UsersInformation();

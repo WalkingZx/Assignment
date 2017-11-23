@@ -12,6 +12,9 @@ import javax.swing.JPanel;
 
 import com.bookSystem.Tools.InterfaceControl;
 
+/**
+ * Main menu for showing all the functions
+ */
 public class mainPanel extends JFrame{
 	JPanel pan[] = new JPanel[4];
 	JButton jadd_u, jadd_b, jmodi_u, jmodi_b;
@@ -38,28 +41,24 @@ public class mainPanel extends JFrame{
 		
 		jadd_u.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				new AddUser();
 			}
 		});
 		
 		jadd_b.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				new AddBook();
 			}
 		});
 		
 		jmodi_u.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				new UsersInformation();
 			}
 		});
 		
 		jmodi_b.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				new BooksInformation();
 			}
 		});

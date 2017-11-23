@@ -17,10 +17,11 @@ import com.bookSystem.Beans.UserList;
 import com.bookSystem.Tools.InterfaceControl;
 import com.bookSystem.Tools.connection;
 
+/**
+ *  This is a interface for showing all books
+ *
+ */
 public class BooksInformation extends JFrame {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 3L;
 	JList<String> list = new JList<String>();
 //	JLabel label = new JLabel("List of users");
@@ -40,54 +41,66 @@ public class BooksInformation extends JFrame {
 		BookList blist = connection.readBooksFromFile();
 //		ArrayList<String> s = new ArrayList<String>();
 		Vector<String> s = new Vector<String>();
-		if(blist != null && blist.numOfBooks() != 0){
-			int count = 0;
-			for(Book u : blist.getAllBooks()){
-				count++;
-				s.add(count + ". " + u.getId() + " " + u.getTitle() + " " + u.getAuthor());
-			}		
-		}else{
-			s.add("No books!");
-		}
-		list.setListData(s);
-		list.setVisibleRowCount(s.size());
-		list.setBorder(BorderFactory
-				.createTitledBorder("Double click to select one book to modify"));
+		try {
+			if(blist != null && blist.numOfBooks() != 0){
+				int count = 0;
+				for(Book u : blist.getAllBooks()){
+					count++;
+					s.add(count + ". " + u.getId() + " " + u.getTitle() + " " + u.getAuthor());
+				}		
+			}else{
+				s.add("No books!");
+			}
+			list.setListData(s);
+			list.setVisibleRowCount(s.size());
+			list.setBorder(BorderFactory
+					.createTitledBorder("Double click to select one book to modify"));
 //		list.addListSelectionListener((ListSelectionListener) this);
-		pan[0].add(list);
-		list.setBounds(15, 15, 400, 700);
-		
-		list.addMouseListener(new MouseAdapter(){
-			public void mouseClicked(MouseEvent e){
-				if(e.getClickCount() == 2){
-					JList myList = (JList)e.getSource();
-					int index = myList.getSelectedIndex();
-					String fullname = (String) myList.getModel().getElementAt(index);
-					String id = getIdOfBook(fullname);
-					BookList ulist = connection.readBooksFromFile();
-					ArrayList<Book> barray = ulist.getAllBooks();
-					Book u = null;
-					for(Book bb : barray){
-						if(id.equals(bb.getId() + "")){
-							u = bb;
+			pan[0].add(list);
+			list.setBounds(15, 15, 400, 700);
+			
+			list.addMouseListener(new MouseAdapter(){
+				public void mouseClicked(MouseEvent e){
+					if(e.getClickCount() == 2){
+						JList myList = (JList)e.getSource();
+						int index = myList.getSelectedIndex();
+						String fullname = (String) myList.getModel().getElementAt(index);
+						String id = getIdOfBook(fullname);
+						BookList ulist = connection.readBooksFromFile();
+						ArrayList<Book> barray = ulist.getAllBooks();
+						Book u = null;
+						for(Book bb : barray){
+							if(id.equals(bb.getId() + "")){
+								u = bb;
+							}
 						}
-					}
-					barray.remove(u);
-					connection.writeBooksToFile(new BookList(barray));
-					modifyBook(u);
-					dispose();
-				} 
-			}
-
-			private void modifyBook(Book u) {
-				new changeBookInfo(u);
-			}
-
-			private String getIdOfBook(String fullname) {
-				String[] s = fullname.split(" ");
-				return s[1];
-			}
-		});
+						barray.remove(u);
+						connection.writeBooksToFile(new BookList(barray));
+						modifyBook(u);
+						dispose();
+					} 
+				}
+				
+				/**
+				 *  Creating a new interface for modifying the detail of a book
+				 *
+				 */
+				private void modifyBook(Book u) {
+					new changeBookInfo(u);
+				}
+				
+				/**
+				 *  Gets the id of a book
+				 *
+				 */
+				private String getIdOfBook(String fullname) {
+					String[] s = fullname.split(" ");
+					return s[1];
+				}
+			});
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		this.setVisible(true);
 		InterfaceControl.setLocationCentre(this);

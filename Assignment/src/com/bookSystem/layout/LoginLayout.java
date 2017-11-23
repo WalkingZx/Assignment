@@ -10,6 +10,9 @@ import javax.swing.JTextField;
 import com.bookSystem.Tools.InterfaceControl;
 import com.bookSystem.Tools.connection;
 
+/**
+ * Creating a interface for a administrator to log in 
+ */
 public class LoginLayout extends JFrame{
     JTextField jTextField ;
     JPasswordField jPasswordField;
@@ -44,33 +47,37 @@ public class LoginLayout extends JFrame{
         
         jb1.addActionListener(new ActionListener() {	
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				String adminInfo = "";
-				adminInfo = connection.getAdminInfo();
-				if(adminInfo.contains("\r\n")){
-					adminInfo = adminInfo.replace("\r\n", "");
-				}
-				
-				String[] info = adminInfo.split("####");
-				String username = info[0];
-				String password = info[1];
-				
-				String input_un = jTextField.getText();
-				String input_pw = String.valueOf(jPasswordField.getPassword());
-				
-				if(input_un.equals(username) && input_pw.equals(password)){
-					JOptionPane.showMessageDialog(null, "Success!");
-					new mainPanel();
-					dispose();
-				}else{
-					JOptionPane.showMessageDialog(null, "Incorrect");
+				try {
+					adminInfo = connection.getAdminInfo();
+					// delete some words that is unuseful
+					if(adminInfo.contains("\r\n")){
+						adminInfo = adminInfo.replace("\r\n", "");
+					}
+					//to get username and password
+					String[] info = adminInfo.split("####");
+					String username = info[0];
+					String password = info[1];
+					
+					String input_un = jTextField.getText();
+					String input_pw = String.valueOf(jPasswordField.getPassword());
+					
+					//compare the information that is inputed and the information that has been stored
+					if(input_un.equals(username) && input_pw.equals(password)){
+						JOptionPane.showMessageDialog(null, "Success!");
+						new mainPanel();
+						dispose();
+					}else{
+						JOptionPane.showMessageDialog(null, "Incorrect");
+					}
+				} catch (HeadlessException e1) {
+					e1.printStackTrace();
 				}
 			}
 		});
         
         jb2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				System.exit(0);
 			}
 		});

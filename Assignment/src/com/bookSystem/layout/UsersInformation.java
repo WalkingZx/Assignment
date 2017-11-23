@@ -15,10 +15,11 @@ import com.bookSystem.Beans.UserList;
 import com.bookSystem.Tools.InterfaceControl;
 import com.bookSystem.Tools.connection;
 
+/**
+ *  Showing all the users' info
+ */
+
 public class UsersInformation extends JFrame {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2L;
 	JList<String> list = new JList<String>();
 //	JLabel label = new JLabel("List of users");
@@ -35,59 +36,63 @@ public class UsersInformation extends JFrame {
 			con.add(pan[i]);
 		}
 		
-		UserList ulist = connection.readUsersFromFile();
+		try {
+			UserList ulist = connection.readUsersFromFile();
 //		ArrayList<String> s = new ArrayList<String>();
-		Vector<String> s = new Vector<String>();
-		if(ulist != null && ulist.numOfUsers() !=0){
-			int count = 0;
-			for(User u : ulist.getAllUsers()){
-				count++;
-				s.add(count + ". " + u.getUsername() + " " + u.getFirstname() + " " + u.getSurname());
-			}		
-		}else{
-			s.add("No users!");
-		}
-		list.setListData(s);
-		list.setVisibleRowCount(s.size());
-		list.setBorder(BorderFactory
-				.createTitledBorder("Double click to select one user to modify"));
+			Vector<String> s = new Vector<String>();
+			if(ulist != null && ulist.numOfUsers() !=0){
+				int count = 0;
+				for(User u : ulist.getAllUsers()){
+					count++;
+					s.add(count + ". " + u.getUsername() + " " + u.getFirstname() + " " + u.getSurname());
+				}		
+			}else{
+				s.add("No users!");
+			}
+			list.setListData(s);
+			list.setVisibleRowCount(s.size());
+			list.setBorder(BorderFactory
+					.createTitledBorder("Double click to select one user to modify"));
 //		list.addListSelectionListener((ListSelectionListener) this);
-		pan[0].add(list);
-		list.setBounds(15, 15, 400, 700);
-		
-		list.addMouseListener(new MouseAdapter(){
-			public void mouseClicked(MouseEvent e){
-				if(e.getClickCount() == 2){
-					JList myList = (JList)e.getSource();
-					int index = myList.getSelectedIndex();
-					String fullname = (String) myList.getModel().getElementAt(index);
-					String username = getUsername(fullname);
-					UserList ulist = connection.readUsersFromFile();
-					User u = ulist.searchUserByUsername(username);
-					ArrayList<User> uarray = ulist.getAllUsers();
-					uarray.remove(u);
-					connection.writeUsersToFile(new UserList(uarray));
-					modifyUser(u);
-					dispose();
+			pan[0].add(list);
+			list.setBounds(15, 15, 400, 700);
+			
+			list.addMouseListener(new MouseAdapter(){
+				public void mouseClicked(MouseEvent e){
+					if(e.getClickCount() == 2){
+						JList myList = (JList)e.getSource();
+						int index = myList.getSelectedIndex();
+						String fullname = (String) myList.getModel().getElementAt(index);
+						String username = getUsername(fullname);
+						UserList ulist = connection.readUsersFromFile();
+						User u = ulist.searchUserByUsername(username);
+						ArrayList<User> uarray = ulist.getAllUsers();
+						uarray.remove(u);
+						connection.writeUsersToFile(new UserList(uarray));
+						modifyUser(u);
+						dispose();
+					}
 				}
-			}
 
-			private void modifyUser(User u) {
-				new changeUserInfo(u);
-			}
+				private void modifyUser(User u) {
+					new changeUserInfo(u);
+				}
 
-			private String getUsername(String fullname) {
-				String[] s = fullname.split(" ");
-				return s[1];
-			}
-			
-			private String getFirstname(String fullname) {
-				String[] s = fullname.split(" ");
-				return s[2];
-			}		
-			
-			
-		});
+				private String getUsername(String fullname) {
+					String[] s = fullname.split(" ");
+					return s[1];
+				}
+				
+				private String getFirstname(String fullname) {
+					String[] s = fullname.split(" ");
+					return s[2];
+				}		
+				
+				
+			});
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		this.setVisible(true);
 		InterfaceControl.setLocationCentre(this);

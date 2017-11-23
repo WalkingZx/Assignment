@@ -10,12 +10,18 @@ import java.io.ObjectOutputStream;
 
 import com.bookSystem.Beans.*;
 
-
+/**
+ *  Connecting the files and the application
+ */
 public class connection {
 	
 	private static String USER_FILE_NAME = "src/users";
 	private static String BOOK_FILE_NAME = "src/books";
 	private static String ADMIN_FILE_NAME = "src/admin";
+	
+	/**
+	 *  Store the users' information
+	 */
 	
 	public static void writeUsersToFile(UserList ulist){
 		File file = null;
@@ -34,6 +40,10 @@ public class connection {
         }
     }
 	
+	/**
+	 *  Store the books' information
+	 */
+	
 	public static void writeBooksToFile(BookList blist){
 		File file = null;
         file = judeFileExists(new File(BOOK_FILE_NAME));
@@ -51,6 +61,9 @@ public class connection {
         }
     }
 	
+	/**
+	 *  Gets the users' information
+	 */
 	public static UserList readUsersFromFile(){
 		UserList temp=null;
 		File file;
@@ -73,6 +86,10 @@ public class connection {
         }
         return temp;
     }
+	
+	/**
+	 *  Gets the books' information
+	 */
 	
 	public static BookList readBooksFromFile(){
 		BookList temp=null;
@@ -97,6 +114,9 @@ public class connection {
         return temp;
     }
 	
+	/**
+	 *  Judge if this file exists or not 
+	 */
     public static File judeFileExists(File file) {
         if (file.exists()) {
             System.out.println("file exists");
@@ -111,6 +131,10 @@ public class connection {
         }
         return file;
     }
+    
+	/**
+	 *  Read the administrators' info 
+	 */
     
     public static String getAdminInfo(){
     	File file = new File(ADMIN_FILE_NAME);

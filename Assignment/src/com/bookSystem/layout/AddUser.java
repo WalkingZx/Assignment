@@ -11,6 +11,10 @@ import com.bookSystem.Beans.*;
 import com.bookSystem.Tools.InterfaceControl;
 import com.bookSystem.Tools.connection;
 
+/**
+ *  This is a interface for adding one new book into userlist
+ *
+ */
 public class AddUser extends JFrame{
 	JPanel pan[] = new JPanel[9];
 	JLabel label_username = new JLabel("Username"); JTextField text_username = new JTextField();
@@ -65,9 +69,7 @@ public class AddUser extends JFrame{
 		
 		pan[8].add(submit); submit.setBounds(85, 15, 80, 50);
 		submit.addActionListener(new ActionListener(){
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
 				   String username = "";
 				   String firstname = "";
 				   String surname = "";
@@ -76,32 +78,35 @@ public class AddUser extends JFrame{
 				   String postcode = "";
 				   String email = "";
 				   String dateOfBirth = "";
-				   
-				   username = text_username.getText();
-				   firstname = text_firstname.getText();
-				   surname = text_surname.getText();
-				   houseNumber = text_houseNumber.getText();
-				   streetName = text_streetName.getText();
-				   postcode = text_postcode.getText();
-				   email = text_email.getText();
-				   dateOfBirth = text_dateOfBirth.getText();
-				   
-				   User u = new User(username, firstname, surname, houseNumber, streetName, postcode, email, dateOfBirth);
-				   UserList ulist = null;
-				   Object obj = connection.readUsersFromFile();
-				   if(obj == null){
-					   ulist = new UserList();
-					   ulist.addUser(u);
-					   JOptionPane.showMessageDialog(null, "Add successfully!");
-					   connection.writeUsersToFile(ulist);
-				   }else if(obj instanceof UserList){
-					   ulist = (UserList) obj;
-					   ulist.addUser(u);
-					   JOptionPane.showMessageDialog(null, "Add successfully!");
-					   connection.writeUsersToFile(ulist);
-				   }else{
-					   System.out.println("Error in adding User");
-				   }				
+				   try {
+					username = text_username.getText();
+					   firstname = text_firstname.getText();
+					   surname = text_surname.getText();
+					   houseNumber = text_houseNumber.getText();
+					   streetName = text_streetName.getText();
+					   postcode = text_postcode.getText();
+					   email = text_email.getText();
+					   dateOfBirth = text_dateOfBirth.getText();
+					   
+					   User u = new User(username, firstname, surname, houseNumber, streetName, postcode, email, dateOfBirth);
+					   UserList ulist = null;
+					   Object obj = connection.readUsersFromFile();
+					   if(obj == null){
+						   ulist = new UserList();
+						   ulist.addUser(u);
+						   JOptionPane.showMessageDialog(null, "Add successfully!");
+						   connection.writeUsersToFile(ulist);
+					   }else if(obj instanceof UserList){
+						   ulist = (UserList) obj;
+						   ulist.addUser(u);
+						   JOptionPane.showMessageDialog(null, "Add successfully!");
+						   connection.writeUsersToFile(ulist);
+					   }else{
+						   System.out.println("Error in adding User");
+					   }
+				} catch (HeadlessException e) {
+					e.printStackTrace();
+				}				
 				   dispose();
 			}
 		});

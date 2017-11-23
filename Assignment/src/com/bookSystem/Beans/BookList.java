@@ -2,14 +2,12 @@ package com.bookSystem.Beans;
 import java.io.Serializable;
 import java.util.ArrayList;
 /**
- * Write a description of class BookList here.
+ * This is a basic class for BookList
  * 
- * @author (your name) 
- * @version (a version number or a date)
  */
 public class BookList implements Serializable
 {
-     /**
+    /**
     * @ store a collection of book objects 
     */
    private static final long serialVersionUID = 200000L;
@@ -18,9 +16,16 @@ public class BookList implements Serializable
    public BookList()
    {}
    
+   /**
+    *  a new constructor for inputing the booklist
+    */
    public BookList(ArrayList<Book> bookList){
 	   this.bookList = bookList;
    }
+   
+   /**
+    *  add a book into the list
+    */
    
    public boolean addBook(Book b)
    {
@@ -30,9 +35,10 @@ public class BookList implements Serializable
    }
     
    /**
-    * @ search through the collection 
-    * @ ﬁnd a book by title, author, publisher or publication date
+    * search through the collection 
+    * ﬁnd a book by title, author, publisher or publication date
     */
+   
    public static Book searchBookByItem(String type, String item, ArrayList<Book> bookList){
 	   Book findBook = null;
 	   for(Book b: bookList){
@@ -47,7 +53,7 @@ public class BookList implements Serializable
    }
     
    /**
-    * @ remove a book from the collection
+    * remove a book from the collection by searching a book's title
     */
    public boolean removeBookByTitle(String title)
    {
@@ -59,23 +65,19 @@ public class BookList implements Serializable
    }
     
    /**
-    * @ return the total number of books stored in the collection
+    * return the total number of books stored in the collection
     */
    public int numOfBooks()
    {
 	   return bookList.size();
    }
    
+   /**
+    * Gets all books as a ArrayList
+    */
+   
    public ArrayList<Book> getAllBooks(){
 	   return this.bookList;
    }
-   
-   public String toString(){
-	   String output = "";
-	   for(Book b : bookList){
-		   output += b.getId() + '\n' + b.getTitle() + '\n';
-	   }
-	   return output;
-   }
-   
+
 }

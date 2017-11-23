@@ -6,10 +6,13 @@ import java.awt.Window;
 
 import javax.swing.JFrame;
 
+/**
+ * @author Xiao Zhou
+ * This class is for setting the JFrame in the centre of the screen
+ *
+ */
 public class InterfaceControl {
-
 	public static void setLocationCentre(JFrame j) {
-		// TODO Auto-generated method stub
         int windowWidth = j.getWidth();
         int windowHeigh = j.getHeight();
         Toolkit kit = Toolkit.getDefaultToolkit();

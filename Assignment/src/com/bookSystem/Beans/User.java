@@ -2,16 +2,7 @@ package com.bookSystem.Beans;
 import java.io.Serializable;
 
 /**
- * Write a description of class Users here.
- * create a user with the following details
- * @ username
- * @ ﬁrstname 
- * @ surname 
- * @ house number
- * @ street name
- * @ postcode 
- * @ email address
- * @ and date of birth 
+ * create a user with the following details 
  */
 public class User implements Serializable
 {
@@ -169,9 +160,5 @@ public class User implements Serializable
     {
         this.dateOfBirth = dateOfBirth ; 
     }
-    
-    public String toString(){
-    	return this.firstname + " " + this.surname;
-    }
-    }
+}
 

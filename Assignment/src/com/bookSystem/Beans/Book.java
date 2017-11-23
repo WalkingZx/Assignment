@@ -3,19 +3,18 @@ import java.io.Serializable;
 import java.util.Random;
 
 /**
- * Write a description of class Books here.
+ * This is a basic class for a book
  * 
  * @id (book ID)
  * @title (book's name)
- * @author (your name) 
- * @year 
+ * @author (author name) 
+ * @year (year)
  * @pubisher(the name of publisher)
  * @availableCopies (number of available copies)
  * @publicationDate (the date of publication)
  */
 public class Book implements Serializable
 {
-    // instance variables - replace the example below with your own
     private int id;
     private String title;
     private String author;
@@ -26,7 +25,7 @@ public class Book implements Serializable
 
     /**
      * Create a constructor of Books class  
-     * @param id 
+     *
      */
     public Book(String title,String author,int year,String publisher,int availableCopies,String pubDate)
     {
@@ -50,7 +49,7 @@ public class Book implements Serializable
     }
     
     /**
-     * Return the id of book    
+     * Gets the id of book    
      */
     public int getId()
     {
@@ -58,7 +57,7 @@ public class Book implements Serializable
     }
 
     /**
-     * Set the id for this Books class  
+     * Sets the id for this Books class  
      */
     public void setId(int id)
     {
@@ -66,7 +65,7 @@ public class Book implements Serializable
     }
 
     /**
-     * Return the title of book    
+     * Returns the title of book    
      */
     public String getTitle()
     {
@@ -74,7 +73,7 @@ public class Book implements Serializable
     }
 
     /**
-     * Set the title for this Books class  
+     * Sets the title for this Books class  
      */
     public void setTitle(String title)
     {
@@ -82,7 +81,7 @@ public class Book implements Serializable
     }
     
     /**
-     * Return the author of book    
+     * Returns the author of book    
      */
     public String getAuthor()
     {
@@ -90,7 +89,7 @@ public class Book implements Serializable
     }
 
     /**
-     * Set the author for this Books class  
+     * Sets the author for this Books class  
      */
     public void setAuthor(String author)
     {
@@ -98,7 +97,7 @@ public class Book implements Serializable
     }
     
     /**
-     * Return the year of book    
+     * Returns the year of book    
      */
     public int getDate()
     {
@@ -106,7 +105,7 @@ public class Book implements Serializable
     }
 
     /**
-     * Set the date for this Books class  
+     * Sets the date for this Books class  
      */
     public void setDate(int year)
     {
@@ -114,7 +113,7 @@ public class Book implements Serializable
     }
     
     /**
-     * Return the publisher's name of book    
+     * Returns the publisher's name of book    
      */
     public String getPublisher()
     {
@@ -122,7 +121,7 @@ public class Book implements Serializable
     }
 
     /**
-     * Set the publisher's name for this Books class  
+     * Sets the publisher's name for this Books class  
      */
     public void setPublisher(String publisher)
     {
@@ -130,7 +129,7 @@ public class Book implements Serializable
     }
     
     /**
-     * Return the number of available copies of book    
+     * Returns the number of available copies of book    
      */
     public int getAvailableCopies()
     {
@@ -138,7 +137,7 @@ public class Book implements Serializable
     }
 
     /**
-     * Set the number of available copies for this Books class  
+     * Sets the number of available copies for this Books class  
      */
     public void setAvailableCopies(int availableCopies)
     {
@@ -146,7 +145,7 @@ public class Book implements Serializable
     }
     
      /**
-     * Return the date of publication of book    
+     * Returns the date of publication of book    
      */
     public String getPublicationDate()
     {
@@ -154,7 +153,7 @@ public class Book implements Serializable
     }
 
     /**
-     * Set the the date of publication for this Books class  
+     * Sets the the date of publication for this Books class  
      */
     public void setPublicationDate(String pubDate)
     {
